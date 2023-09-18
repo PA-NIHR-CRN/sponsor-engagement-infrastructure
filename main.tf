@@ -58,7 +58,7 @@ module "rds_aurora" {
   maintenance_window      = var.names["${var.env}"]["maintenancewindow"]
   grant_dev_db_access     = var.names["${var.env}"]["grant_dev_db_access"]
   subnet_group            = "${var.names["${var.env}"]["accountidentifiers"]}-rds-sng-${var.env}-public"
-  db_name                 = "sponsor-engagement"
+  db_name                 = "sponsorengagement"
   username                = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["db-username"]
   instance_count          = var.names["${var.env}"]["rds_instance_count"]
   az_zones                = var.names["${var.env}"]["az_zones"]
