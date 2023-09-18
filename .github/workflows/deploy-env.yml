@@ -8,6 +8,7 @@ on:
         options:
         - dev
         - test
+        - qa
         - uat
         - oat
         - prod
