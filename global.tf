@@ -22,7 +22,7 @@ variable "names" {
       "ecs_subnet"            = ["subnet-067afb7d7e5af4f36", "subnet-0ab17287bb419808a"]
       "lb_subnet"             = ["subnet-04ad191ac2b66d763", "subnet-093eeb64493db3d5f"]
       "rds_instance_count"    = "1"
-      "az_zones"              = ["eu-west-2a"]
+      "az_zones"              = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
       "min_capacity"          = 0.5
       "max_capacity"          = 4
       "log_types"             = ["error", "general", "slowquery"]
@@ -50,7 +50,7 @@ variable "names" {
       "ecs_subnet"            = ["subnet-013380fc814fcd7a8", "subnet-026e43c345c497f81"]
       "lb_subnet"             = ["subnet-012b28f51a536264f", "subnet-0b31379ceb59b3aa2"]
       "rds_instance_count"    = "1"
-      "az_zones"              = ["eu-west-2a"]
+      "az_zones"              = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
       "min_capacity"          = 0.5
       "max_capacity"          = 4
       "log_types"             = ["error", "general", "slowquery"]
