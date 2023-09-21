@@ -31,26 +31,140 @@ module "waf" {
       managed_rule_group_statement = {
         name        = "AWSManagedRulesCommonRuleSet"
         vendor_name = "AWS"
-        excluded_rule = [
-          "NoUserAgent_HEADER",
-          "UserAgent_BadBots_HEADER",
-          "SizeRestrictions_QUERYSTRING",
-          "SizeRestrictions_Cookie_HEADER",
-          "SizeRestrictions_BODY",
-          "SizeRestrictions_URIPATH",
-          "EC2MetaDataSSRF_BODY",
-          "EC2MetaDataSSRF_COOKIE",
-          "EC2MetaDataSSRF_URIPATH",
-          "EC2MetaDataSSRF_QUERYARGUMENTS",
-          "RestrictedExtensions_URIPATH",
-          "RestrictedExtensions_QUERYARGUMENTS",
-          "GenericRFI_QUERYARGUMENTS",
-          "GenericRFI_BODY",
-          "GenericRFI_URIPATH",
-          "CrossSiteScripting_COOKIE",
-          "CrossSiteScripting_QUERYARGUMENTS",
-          "CrossSiteScripting_BODY",
-          "CrossSiteScripting_URIPATH"
+        rule_action_overrides = [
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "NoUserAgent_HEADER"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "UserAgent_BadBots_HEADER"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "SizeRestrictions_QUERYSTRING"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "SizeRestrictions_Cookie_HEADER"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "SizeRestrictions_BODY"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "SizeRestrictions_URIPATH"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "EC2MetaDataSSRF_BODY"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "EC2MetaDataSSRF_COOKIE"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "EC2MetaDataSSRF_URIPATH"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "EC2MetaDataSSRF_QUERYARGUMENTS"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "RestrictedExtensions_URIPATH"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "RestrictedExtensions_QUERYARGUMENTS"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "GenericRFI_QUERYARGUMENTS"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "GenericRFI_BODY"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "GenericRFI_URIPATH"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "CrossSiteScripting_COOKIE"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "CrossSiteScripting_QUERYARGUMENTS"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "CrossSiteScripting_BODY"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "CrossSiteScripting_URIPATH"
+          },
         ]
       }
 
@@ -68,9 +182,21 @@ module "waf" {
       managed_rule_group_statement = {
         name        = "AWSManagedRulesKnownBadInputsRuleSet"
         vendor_name = "AWS"
-        excluded_rule = [
-          "Host_localhost_HEADER",
-          "PROPFIND_METHOD"
+        rule_action_overrides = [
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "Host_localhost_HEADER"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "PROPFIND_METHOD"
+          }
         ]
       }
 
@@ -89,9 +215,21 @@ module "waf" {
       managed_rule_group_statement = {
         name        = "AWSManagedRulesAmazonIpReputationList"
         vendor_name = "AWS"
-        excluded_rule = [
-          "AWSManagedIPReputationList",
-          "AWSManagedReconnaissanceList"
+        rule_action_overrides = [
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "AWSManagedIPReputationList"
+          },
+          {
+            action_to_use = {
+              count = {}
+            }
+
+            name = "AWSManagedReconnaissanceList"
+          }
         ]
       }
 
