@@ -9,7 +9,7 @@ variable "names" {
       "accountidentifiers"    = "crnccd"
       "environment"           = "dev"
       "app"                   = "se"
-      "backupretentionperiod" = 1
+      "backupretentionperiod" = 7
       "engine"                = "mysql"
       "engine_version"        = "8.0.mysql_aurora.3.02.2"
       "instanceclass"         = "db.serverless"
@@ -37,7 +37,7 @@ variable "names" {
       "accountidentifiers"    = "crnccd"
       "environment"           = "test"
       "app"                   = "se"
-      "backupretentionperiod" = 1
+      "backupretentionperiod" = 7
       "engine"                = "mysql"
       "engine_version"        = "8.0.mysql_aurora.3.02.2"
       "instanceclass"         = "db.serverless"
@@ -65,7 +65,7 @@ variable "names" {
       "accountidentifiers"    = "crnccs"
       "environment"           = "uat"
       "app"                   = "se"
-      "backupretentionperiod" = 1
+      "backupretentionperiod" = 7
       "engine"                = "mysql"
       "engine_version"        = "8.0.mysql_aurora.3.02.2"
       "instanceclass"         = "db.serverless"
@@ -94,7 +94,7 @@ variable "names" {
       "accountidentifiers"    = "crnccp"
       "environment"           = "oat"
       "app"                   = "se"
-      "backupretentionperiod" = 1
+      "backupretentionperiod" = 7
       "engine"                = "mysql"
       "engine_version"        = "8.0.mysql_aurora.3.02.2"
       "instanceclass"         = "db.serverless"

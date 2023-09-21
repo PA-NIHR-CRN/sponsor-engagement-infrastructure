@@ -93,7 +93,7 @@ resource "aws_rds_cluster" "rds_cluster" {
   master_password                 = random_password.password.result
   backup_retention_period         = var.backup_retention_period
   preferred_maintenance_window    = var.maintenance_window
-  preferred_backup_window         = "23:00-00:00"
+  preferred_backup_window         = "02:00-04:00"
   storage_encrypted               = true
   skip_final_snapshot             = var.skip_final_snapshot
   db_subnet_group_name            = var.subnet_group
