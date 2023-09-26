@@ -90,11 +90,6 @@ module "ecs" {
   whitelist_ips    = var.names["${var.env}"]["whitelist_ips"]
   domain_name      = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["domain-name"]
   validation_email = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["validation-email"]
-  #scheduled-task
-  event_rule_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-container"
-  event_rule_schedule_expression = "cron(0 20 * * ? *)"
-  scheduled_container_name       = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-ingest-container"
-  scheduled_image_url            = "${module.ecr.repository_url}:${var.names["system"]}-ingest"
 }
 
 module "event_role" {
