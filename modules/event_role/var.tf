@@ -7,12 +7,6 @@ variable "system" {
   type = string
 }
 
-variable "vpc_id" {
-  description = "vpc id"
-  type        = string
-
-}
-
 variable "account" {
   description = "account name"
   type        = string
@@ -23,9 +17,6 @@ variable "account" {
 #------------------------------------------------------------------------------
 # CLOUDWATCH EVENT RULE
 #------------------------------------------------------------------------------
-variable "event_rule_name" {
-  description = "The name of the rule."
-}
 
 variable "event_rule_schedule_expression" {
   description = "(Optional) The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of event_rule_schedule_expression or event_rule_event_pattern is required. Can only be used on the default event bus."
