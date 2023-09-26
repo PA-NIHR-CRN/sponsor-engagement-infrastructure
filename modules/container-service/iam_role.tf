@@ -49,3 +49,7 @@ resource "aws_iam_role_policy" "task-execution-role-policy" {
     ]
   })
 }
+
+output "role_arn" {
+  value = aws_iam_role.iam-ecs-task-role.arn
+}

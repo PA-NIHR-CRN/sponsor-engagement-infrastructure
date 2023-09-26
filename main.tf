@@ -90,7 +90,38 @@ module "ecs" {
   whitelist_ips    = var.names["${var.env}"]["whitelist_ips"]
   domain_name      = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["domain-name"]
   validation_email = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["validation-email"]
+  #scheduled-task
+  event_rule_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-container"
+  event_rule_schedule_expression = "cron(0 20 * * ? *)"
+  scheduled_container_name       = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-ingest-container"
+  scheduled_image_url            = "${module.ecr.repository_url}:${var.names["system"]}-ingest"
 }
+
+module "event_role" {
+  source          = "./modules/event_role"
+  account         = var.names["${var.env}"]["accountidentifiers"]
+  env             = var.env
+  system          = var.names["system"]
+  ecs_cluster_arn = module.ecs.ecs_cluster_arn
+
+}
+
+module "ingest_scheduled_task" {
+  source                                  = "./modules/ecs_scheduled_task"
+  account                                 = var.names["${var.env}"]["accountidentifiers"]
+  env                                     = var.env
+  system                                  = var.names["system"]
+  app                                     = "ingest"
+  event_rule_role_arn                     = module.event_role.event_role_arn
+  ecs_cluster_arn                         = module.ecs.ecs_cluster_arn
+  ecs_task_role_arn                       = module.ecs.role_arn
+  event_target_ecs_target_subnets         = (var.names["${var.env}"]["ecs_subnet"])
+  event_target_ecs_target_security_groups = module.ecs.ecs_sg
+  event_rule_schedule_expression          = "cron(0 20 * * ? *)"
+  scheduled_container_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-ingest-container"
+  scheduled_image_url                     = "${module.ecr.repository_url}:${var.names["system"]}-ingest"
+}
+
 
 module "ecr" {
   source    = "./modules/ecr"
