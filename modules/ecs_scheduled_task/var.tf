@@ -7,16 +7,8 @@ variable "system" {
   type = string
 }
 
-variable "vpc_id" {
-  description = "vpc id"
-  type        = string
-
-}
-
-variable "ecs_subnets" {
-  description = "list of subnets for ecs"
-  type        = list(any)
-
+variable "app" {
+  type = string
 }
 
 variable "account" {
@@ -26,12 +18,17 @@ variable "account" {
 
 }
 
+variable "scheduled_container_name" {
+  type = string
+}
+
+variable "scheduled_image_url" {
+  type = string
+}
+
 #------------------------------------------------------------------------------
 # CLOUDWATCH EVENT RULE
 #------------------------------------------------------------------------------
-variable "event_rule_name" {
-  description = "The name of the rule."
-}
 
 variable "event_rule_schedule_expression" {
   description = "(Optional) The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of event_rule_schedule_expression or event_rule_event_pattern is required. Can only be used on the default event bus."
@@ -86,15 +83,6 @@ variable "event_target_input_path" {
   default     = null
 }
 
-variable "ecs_execution_task_role_arn" {
-  description = "(Required) The task definition execution role. The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered."
-}
-
-variable "ecs_task_role_arn" {
-  description = "(Optional) The task definition role. The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered."
-  default     = null
-}
-
 variable "event_target_ecs_target_group" {
   description = "(Optional) Specifies an ECS task group for the task. The maximum length is 255 characters."
   default     = null
@@ -109,10 +97,6 @@ variable "event_target_ecs_target_task_count" {
   description = "(Optional) The number of tasks to create based on the TaskDefinition. The default is 1."
   type        = number
   default     = 1
-}
-
-variable "event_target_ecs_target_task_definition_arn" {
-  description = "(Required) The ARN of the task definition to use if the event target is an Amazon ECS cluster."
 }
 
 variable "event_target_ecs_target_subnets" {
