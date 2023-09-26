@@ -26,6 +26,10 @@ variable "scheduled_image_url" {
   type = string
 }
 
+variable "ecs_task_role_arn" {
+  default     = null
+}
+
 #------------------------------------------------------------------------------
 # CLOUDWATCH EVENT RULE
 #------------------------------------------------------------------------------
