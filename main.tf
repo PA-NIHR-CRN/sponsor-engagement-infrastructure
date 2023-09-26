@@ -93,11 +93,12 @@ module "ecs" {
 }
 
 module "event_role" {
-  source          = "./modules/event_role"
-  account         = var.names["${var.env}"]["accountidentifiers"]
-  env             = var.env
-  system          = var.names["system"]
-  ecs_cluster_arn = module.ecs.ecs_cluster_arn
+  source                      = "./modules/event_role"
+  account                     = var.names["${var.env}"]["accountidentifiers"]
+  env                         = var.env
+  system                      = var.names["system"]
+  ecs_cluster_arn             = module.ecs.ecs_cluster_arn
+  ecs_execution_task_role_arn = module.ecs.role_arn
 
 }
 

@@ -14,6 +14,12 @@ variable "account" {
 
 }
 
+variable "ecs_task_role_arn" {
+  default = null
+}
+variable "ecs_execution_task_role_arn" {
+
+}
 #------------------------------------------------------------------------------
 # CLOUDWATCH EVENT RULE
 #------------------------------------------------------------------------------

@@ -27,9 +27,8 @@ variable "scheduled_image_url" {
 }
 
 variable "ecs_task_role_arn" {
-  default     = null
+  default = null
 }
-
 #------------------------------------------------------------------------------
 # CLOUDWATCH EVENT RULE
 #------------------------------------------------------------------------------

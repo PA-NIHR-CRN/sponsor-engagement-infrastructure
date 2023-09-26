@@ -49,6 +49,16 @@ resource "aws_cloudwatch_event_target" "ecs_scheduled_task" {
 # SCHEDULED TASK DEFINITION
 #------------------------------------------------------------------------------
 
+resource "aws_cloudwatch_log_group" "ecs-loggroup" {
+  name = "${var.account}-ecs-${var.env}-${var.system}-${var.app}-loggroup"
+
+  tags = {
+    Name        = "${var.account}-ecs-cloudwatch-${var.env}-${var.system}-${var.app}-loggroup",
+    Environment = var.env,
+    System      = var.system,
+  }
+}
+
 resource "aws_ecs_task_definition" "scheduled-task-definition" {
   family                   = "${var.account}-ecs-${var.env}-${var.system}-${var.app}-task-definition"
   network_mode             = "awsvpc"
@@ -69,7 +79,7 @@ resource "aws_ecs_task_definition" "scheduled-task-definition" {
     logConfiguration = {
       logDriver = "awslogs"
       options = {
-        awslogs-group         = aws_cloudwatch_log_group.ecs-cloudwatchloggroup.id
+        awslogs-group         = aws_cloudwatch_log_group.ecs-loggroup.id
         awslogs-region        = "eu-west-2"
         awslogs-stream-prefix = "ecs"
       }
