@@ -43,6 +43,13 @@ resource "aws_cloudwatch_event_target" "ecs_scheduled_task" {
       assign_public_ip = var.event_target_ecs_target_assign_public_ip
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      task_definition_arn
+    ]
+  }
+
 }
 
 #------------------------------------------------------------------------------
