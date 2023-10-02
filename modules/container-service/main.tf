@@ -115,3 +115,7 @@ resource "aws_ecs_service" "ecs_service" {
 output "ecs_sg" {
   value = aws_security_group.sg-ecs.id
 }
+
+output "ecs_cluster_arn" {
+  value = aws_ecs_cluster.ecs-cluster.arn
+}
