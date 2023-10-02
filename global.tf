@@ -55,7 +55,7 @@ variable "names" {
       "max_capacity"          = 4
       "log_types"             = ["error", "general", "slowquery"]
       "publicly_accessible"   = true
-      "add_scheduler_tag"     = true
+      "add_scheduler_tag"     = false
       "ecs_instance_count"    = 1
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
@@ -84,7 +84,7 @@ variable "names" {
       "max_capacity"          = 4
       "log_types"             = ["error", "general", "slowquery"]
       "publicly_accessible"   = true
-      "add_scheduler_tag"     = true
+      "add_scheduler_tag"     = false
       "ecs_instance_count"    = 1
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
@@ -112,7 +112,7 @@ variable "names" {
       "max_capacity"          = 4
       "log_types"             = ["error", "general", "slowquery"]
       "publicly_accessible"   = true
-      "add_scheduler_tag"     = true
+      "add_scheduler_tag"     = false
       "ecs_instance_count"    = 3
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
@@ -140,7 +140,7 @@ variable "names" {
       "max_capacity"          = 4
       "log_types"             = ["error", "general", "slowquery"]
       "publicly_accessible"   = true
-      "add_scheduler_tag"     = true
+      "add_scheduler_tag"     = false
       "ecs_instance_count"    = 3
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
