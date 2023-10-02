@@ -117,6 +117,12 @@ resource "aws_rds_cluster" "rds_cluster" {
     var.env == "prod" ? { "aws-backup-daily" = "true" } : {},
     var.env == "prod" ? { "aws-backup-weekly" = "true" } : {},
   )
+
+  lifecycle {
+    ignore_changes = [ 
+      engine_version
+     ]
+  }
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
