@@ -9,7 +9,6 @@ resource "aws_security_group" "sg-lb" {
     to_port          = 80
     protocol         = "tcp"
     cidr_blocks      = var.whitelist_ips
-    ipv6_cidr_blocks = ["::/0"]
   }
 
   ingress {
@@ -18,7 +17,6 @@ resource "aws_security_group" "sg-lb" {
     to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = var.whitelist_ips
-    ipv6_cidr_blocks = ["::/0"]
   }
 
   egress {
