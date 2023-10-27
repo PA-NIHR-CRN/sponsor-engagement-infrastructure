@@ -19,3 +19,6 @@ variable "waf_scope" {
 variable "alb_arn" {
 
 }
+variable "waf_ip_set_arn" {
+
+}

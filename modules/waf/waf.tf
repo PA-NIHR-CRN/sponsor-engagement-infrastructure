@@ -241,26 +241,47 @@ module "waf" {
 
     },
     {
-      name            = "${var.name}-httpfloodprotection",
-      priority        = 3
-      override_action = "none"
+      name     = "${var.name}-httpfloodprotection",
+      priority = 3
+      action   = "count"
 
-      managed_rule_group_statement = {
-        name        = "AWSManagedRulesAmazonIpReputationList"
-        vendor_name = "AWS"
-        excluded_rule = [
-          "AWSManagedIPReputationList",
-          "AWSManagedReconnaissanceList"
-        ]
+      rate_based_statement = {
+        limit              = 3000
+        aggregate_key_type = "IP"
+        scope_down_statement = {
+          not_statement = {
+            ip_set_reference_statement = {
+              arn = var.waf_ip_set_arn
+            }
+          }
+        }
       }
+
 
       visibility_config = {
         cloudwatch_metrics_enabled = true
-        metric_name                = "${var.name}-metric"
+        metric_name                = "${var.name}-httpfloodprotection-metric"
         sampled_requests_enabled   = true
       }
 
-    }
+    },
+    # {
+    #   name            = "${var.name}-botcontrolruleset",
+    #   priority        = 4
+    #   override_action = "none"
+
+    #   managed_rule_group_statement = {
+    #     name        = "AWSManagedRulesBotControlRuleSet"
+    #     vendor_name = "AWS"
+    #   }
+
+    #   visibility_config = {
+    #     cloudwatch_metrics_enabled = true
+    #     metric_name                = "${var.name}-botcontrol-metric"
+    #     sampled_requests_enabled   = true
+    #   }
+
+    # }
 
   ]
 
