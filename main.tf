@@ -57,6 +57,7 @@ module "rds_aurora" {
   backup_retention_period = var.names["${var.env}"]["backupretentionperiod"]
   maintenance_window      = var.names["${var.env}"]["maintenancewindow"]
   grant_dev_db_access     = var.names["${var.env}"]["grant_dev_db_access"]
+  grant_odp_db_access     = var.names["${var.env}"]["grant_odp_db_access"]
   subnet_group            = "${var.names["${var.env}"]["accountidentifiers"]}-rds-sng-${var.env}-public"
   db_name                 = "sponsorengagement"
   username                = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["db-username"]
@@ -70,7 +71,7 @@ module "rds_aurora" {
   add_scheduler_tag       = var.names["${var.env}"]["add_scheduler_tag"]
   ecs_sg                  = module.ecs.ecs_sg
   whitelist_ips           = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["whitelist-ips"]
-
+  odp_db_server_ip        = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["odp-db-server-ip"]
 }
 
 ## ECS FARGATE
