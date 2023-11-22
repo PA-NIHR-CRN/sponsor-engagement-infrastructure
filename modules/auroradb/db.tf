@@ -2,12 +2,15 @@ data "aws_vpc" "vpc" {
   id = var.vpc_id
 }
 
-
 resource "aws_security_group" "sg-rds" {
   name        = "${var.account}-sg-rds-aurora-${var.env}-${var.app}"
   description = "Allow MYSQL inbound traffic"
   vpc_id      = var.vpc_id
-
+  lifecycle {
+    ignore_changes = [ 
+      ingress
+     ]
+  }
 
   ingress {
     description     = "ecs-to-rds"
