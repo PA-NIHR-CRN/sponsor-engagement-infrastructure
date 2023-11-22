@@ -31,6 +31,8 @@ variable "names" {
       "ecs_instance_count"    = 1
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
     }
 
     "test" = {
@@ -59,6 +61,8 @@ variable "names" {
       "ecs_instance_count"    = 1
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
     }
 
     "uat" = {
@@ -88,6 +92,8 @@ variable "names" {
       "ecs_instance_count"    = 1
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
     }
 
     "oat" = {
@@ -116,6 +122,8 @@ variable "names" {
       "ecs_instance_count"    = 3
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 1024
+      "ecs_memory"            = 4096
     }
 
     "prod" = {
@@ -144,6 +152,8 @@ variable "names" {
       "ecs_instance_count"    = 3
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 1024
+      "ecs_memory"            = 4096
     }
   }
 }
