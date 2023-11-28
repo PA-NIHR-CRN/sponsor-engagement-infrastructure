@@ -86,8 +86,6 @@ module "ecs" {
   lb_subnets       = (var.names["${var.env}"]["lb_subnet"])
   container_name   = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-container"
   instance_count   = var.names["${var.env}"]["ecs_instance_count"]
-  cpu              = var.names["${var.env}"]["ecs_cpu"]
-  memory           = var.names["${var.env}"]["ecs_memory"]
   image_url        = "${module.ecr.repository_url}:${var.names["system"]}-web"
   logs_bucket      = "gscs-aws-logs-s3-${local.account_id}-eu-west-2"
   whitelist_ips    = var.names["${var.env}"]["whitelist_ips"]
