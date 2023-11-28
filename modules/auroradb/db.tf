@@ -2,12 +2,10 @@ data "aws_vpc" "vpc" {
   id = var.vpc_id
 }
 
-
 resource "aws_security_group" "sg-rds" {
   name        = "${var.account}-sg-rds-aurora-${var.env}-${var.app}"
   description = "Allow MYSQL inbound traffic"
   vpc_id      = var.vpc_id
-
 
   ingress {
     description     = "ecs-to-rds"
@@ -25,6 +23,17 @@ resource "aws_security_group" "sg-rds" {
       to_port     = 3306
       protocol    = "tcp"
       cidr_blocks = var.whitelist_ips
+    }
+  }
+
+    dynamic "ingress" {
+    for_each = var.grant_odp_db_access ? [1] : []
+    content {
+      description = "ODP DB IP"
+      from_port   = 3306
+      to_port     = 3306
+      protocol    = "tcp"
+      cidr_blocks = var.odp_db_server_ip
     }
   }
 
@@ -113,7 +122,7 @@ resource "aws_rds_cluster" "rds_cluster" {
       System           = var.app
       aws-backup-daily = true
     },
-    var.add_scheduler_tag ? { "instance-scheduler" = "rds-frf" } : {},
+    var.add_scheduler_tag ? { "instance-scheduler" = "rds-se" } : {},
     var.env == "prod" ? { "aws-backup-daily" = "true" } : {},
     var.env == "prod" ? { "aws-backup-weekly" = "true" } : {},
   )

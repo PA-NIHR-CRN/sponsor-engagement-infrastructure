@@ -19,6 +19,7 @@ variable "names" {
       "maintenancewindow"     = "Sat:04:00-Sat:05:00"
       "storageencrypted"      = true
       "grant_dev_db_access"   = true
+      "grant_odp_db_access"   = false
       "ecs_subnet"            = ["subnet-067afb7d7e5af4f36", "subnet-0ab17287bb419808a"]
       "lb_subnet"             = ["subnet-04ad191ac2b66d763", "subnet-093eeb64493db3d5f"]
       "rds_instance_count"    = "1"
@@ -31,6 +32,8 @@ variable "names" {
       "ecs_instance_count"    = 1
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
     }
 
     "test" = {
@@ -47,6 +50,7 @@ variable "names" {
       "maintenancewindow"     = "Sat:04:00-Sat:05:00"
       "storageencrypted"      = true
       "grant_dev_db_access"   = true
+      "grant_odp_db_access"   = false
       "ecs_subnet"            = ["subnet-013380fc814fcd7a8", "subnet-026e43c345c497f81"]
       "lb_subnet"             = ["subnet-012b28f51a536264f", "subnet-0b31379ceb59b3aa2"]
       "rds_instance_count"    = "1"
@@ -59,6 +63,8 @@ variable "names" {
       "ecs_instance_count"    = 1
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
     }
 
     "uat" = {
@@ -75,6 +81,7 @@ variable "names" {
       "maintenancewindow"     = "Sat:04:00-Sat:05:00"
       "storageencrypted"      = true
       "grant_dev_db_access"   = true
+      "grant_odp_db_access"   = true
       "ecs_subnet"            = ["subnet-014f7c22b8ca588d2", "subnet-0393f098f6159948e"]
       "lb_subnet"             = ["subnet-0eda6aac2aa3f6a8a", "subnet-0e0d905781bfc0687"]
       "container_image_url"   = ""
@@ -88,6 +95,8 @@ variable "names" {
       "ecs_instance_count"    = 1
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
     }
 
     "oat" = {
@@ -104,6 +113,7 @@ variable "names" {
       "maintenancewindow"     = "Sat:04:00-Sat:05:00"
       "storageencrypted"      = true
       "grant_dev_db_access"   = true
+      "grant_odp_db_access"   = true
       "ecs_subnet"            = ["subnet-0c5ed34136a1896d5", "subnet-0c599b4c6ea142959", "subnet-052279d19b778a506"]
       "lb_subnet"             = ["subnet-046f1aadc23c50b9c", "subnet-07cb31be0a01cd0ca", "subnet-0f176c1fd30d60574"]
       "rds_instance_count"    = "3"
@@ -116,6 +126,8 @@ variable "names" {
       "ecs_instance_count"    = 3
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 1024
+      "ecs_memory"            = 4096
     }
 
     "prod" = {
@@ -132,6 +144,7 @@ variable "names" {
       "maintenancewindow"     = "Sat:04:00-Sat:05:00"
       "storageencrypted"      = true
       "grant_dev_db_access"   = true
+      "grant_odp_db_access"   = true
       "ecs_subnet"            = ["subnet-05f4307eb2a2d1f10", "subnet-080e771c9db3aa1fc", "subnet-025c35dccad5330e4"]
       "lb_subnet"             = ["subnet-0f22b341632d789a6", "subnet-0122964cc845a1b61", "subnet-035cab03e4bd37e4f"]
       "rds_instance_count"    = "3"
@@ -144,6 +157,8 @@ variable "names" {
       "ecs_instance_count"    = 3
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
+      "ecs_cpu"               = 1024
+      "ecs_memory"            = 4096
     }
   }
 }

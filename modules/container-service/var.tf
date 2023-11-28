@@ -39,6 +39,11 @@ variable "container_name" {
 
 }
 
+variable "ecs_cpu" {
+}
+
+variable "ecs_memory" {
+}
 
 variable "image_url" {
   description = "container image url"

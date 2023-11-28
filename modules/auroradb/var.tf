@@ -48,7 +48,10 @@ variable "maintenance_window" {
 
 variable "grant_dev_db_access" {
   default = true
+}
 
+variable "grant_odp_db_access" {
+  default = true
 }
 
 variable "az_zones" {
@@ -107,4 +110,7 @@ variable "ecs_sg" {
 # }
 
 variable "whitelist_ips" {
+}
+
+variable "odp_db_server_ip" {
 }
