@@ -65,10 +65,3 @@ variable "domain_name" {
 variable "validation_email" {
 
 }
-
-variable "cpu" {
-
-}
-variable "memory" {
-
-}

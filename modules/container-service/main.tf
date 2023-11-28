@@ -23,8 +23,8 @@ resource "aws_ecs_task_definition" "ecs-task-definition" {
   family                   = "${var.account}-ecs-${var.env}-${var.system}-task-definition"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = var.cpu
-  memory                   = var.memory
+  cpu                      = 512
+  memory                   = 1024
   execution_role_arn       = aws_iam_role.iam-ecs-task-role.arn
   task_role_arn            = aws_iam_role.iam-ecs-task-role.arn
   container_definitions = jsonencode([{
