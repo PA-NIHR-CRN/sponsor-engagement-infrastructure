@@ -29,6 +29,8 @@ variable "names" {
       "publicly_accessible"   = true
       "add_scheduler_tag"     = true
       "ecs_instance_count"    = 1
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
     }
@@ -57,6 +59,8 @@ variable "names" {
       "publicly_accessible"   = true
       "add_scheduler_tag"     = true
       "ecs_instance_count"    = 1
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
     }
@@ -86,6 +90,8 @@ variable "names" {
       "publicly_accessible"   = true
       "add_scheduler_tag"     = true
       "ecs_instance_count"    = 1
+      "ecs_cpu"               = 512
+      "ecs_memory"            = 1024
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
     }
@@ -114,6 +120,8 @@ variable "names" {
       "publicly_accessible"   = true
       "add_scheduler_tag"     = true
       "ecs_instance_count"    = 3
+      "ecs_cpu"               = 1024
+      "ecs_memory"            = 4096
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
     }
@@ -142,6 +150,8 @@ variable "names" {
       "publicly_accessible"   = true
       "add_scheduler_tag"     = false
       "ecs_instance_count"    = 3
+      "ecs_cpu"               = 1024
+      "ecs_memory"            = 4096
       "waf_create"            = "true"
       "whitelist_ips"         = ["0.0.0.0/0"]
     }
