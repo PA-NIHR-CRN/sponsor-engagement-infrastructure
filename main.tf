@@ -135,6 +135,12 @@ data "aws_cloudwatch_log_group" "waf_log_group" {
   name = "aws-waf-logs-lg-gscs-${local.account_id}-eu-west-2"
 }
 
+data "aws_wafv2_ip_set" "ip_set" {
+  name  = "gscs-waf-rate-based-excluded-ips"
+  scope = "REGIONAL"
+}
+
+
 module "waf" {
   source         = "./modules/waf"
   name           = "${var.names["${var.env}"]["accountidentifiers"]}-waf-${var.env}-${var.names["system"]}-acl-eu-west-2"
@@ -145,4 +151,5 @@ module "waf" {
   system         = var.names["system"]
   enable_logging = true
   log_group      = [data.aws_cloudwatch_log_group.waf_log_group.arn]
+  waf_ip_set_arn = data.aws_wafv2_ip_set.ip_set.arn
 }

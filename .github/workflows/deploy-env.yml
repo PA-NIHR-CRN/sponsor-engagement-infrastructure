@@ -69,7 +69,7 @@ jobs:
             echo "::set-env name=APPLY_PLAN::${{ github.event.inputs.applyplan }}"
             
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1.6.0
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ env.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ env.AWS_SEC_ACCESS_KEY }}
@@ -77,7 +77,7 @@ jobs:
         
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
       
     - name: Terraform Init ${{ github.event.inputs.environment }}

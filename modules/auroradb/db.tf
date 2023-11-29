@@ -26,7 +26,7 @@ resource "aws_security_group" "sg-rds" {
     }
   }
 
-    dynamic "ingress" {
+  dynamic "ingress" {
     for_each = var.grant_odp_db_access ? [1] : []
     content {
       description = "ODP DB IP"
@@ -128,9 +128,9 @@ resource "aws_rds_cluster" "rds_cluster" {
   )
 
   lifecycle {
-    ignore_changes = [ 
+    ignore_changes = [
       engine_version
-     ]
+    ]
   }
 }
 
