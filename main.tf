@@ -119,8 +119,27 @@ module "ingest_scheduled_task" {
   event_rule_schedule_expression          = "cron(0 18 * * ? *)"
   scheduled_container_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-ingest-container"
   scheduled_image_url                     = "${module.ecr.repository_url}:${var.names["system"]}-ingest"
+  ecs_cpu                                 = 1042
+  ecs_memory                              = 4096
 }
 
+module "notify_scheduled_task" {
+  source                                  = "./modules/ecs_scheduled_task"
+  account                                 = var.names["${var.env}"]["accountidentifiers"]
+  env                                     = var.env
+  system                                  = var.names["system"]
+  app                                     = "notify"
+  event_rule_role_arn                     = module.event_role.event_role_arn
+  ecs_cluster_arn                         = module.ecs.ecs_cluster_arn
+  ecs_task_role_arn                       = module.ecs.role_arn
+  event_target_ecs_target_subnets         = (var.names["${var.env}"]["ecs_subnet"])
+  event_target_ecs_target_security_groups = [module.ecs.ecs_sg]
+  event_rule_schedule_expression          = "cron(0 18 1 */3 ? *)"
+  scheduled_container_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-notify-container"
+  scheduled_image_url                     = "${module.ecr.repository_url}:${var.names["system"]}-notify"
+  ecs_cpu                                 = var.names["${var.env}"]["ecs_cpu"]
+  ecs_memory                              = var.names["${var.env}"]["ecs_memory"]
+}
 
 module "ecr" {
   source    = "./modules/ecr"
