@@ -70,8 +70,8 @@ resource "aws_ecs_task_definition" "scheduled-task-definition" {
   family                   = "${var.account}-ecs-${var.env}-${var.system}-${var.app}-task-definition"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = 1024
-  memory                   = 4096
+  cpu                      = var.ecs_cpu
+  memory                   = var.ecs_memory
   execution_role_arn       = var.ecs_task_role_arn
   task_role_arn            = var.ecs_task_role_arn
   container_definitions = jsonencode([{
