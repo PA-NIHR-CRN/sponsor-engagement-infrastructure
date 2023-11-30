@@ -119,7 +119,7 @@ module "ingest_scheduled_task" {
   event_rule_schedule_expression          = "cron(0 18 * * ? *)"
   scheduled_container_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-ingest-container"
   scheduled_image_url                     = "${module.ecr.repository_url}:${var.names["system"]}-ingest"
-  ecs_cpu                                 = 1042
+  ecs_cpu                                 = 1024
   ecs_memory                              = 4096
 }
 
