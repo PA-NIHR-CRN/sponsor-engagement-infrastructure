@@ -116,7 +116,7 @@ module "ingest_scheduled_task" {
   ecs_task_role_arn                       = module.ecs.role_arn
   event_target_ecs_target_subnets         = (var.names["${var.env}"]["ecs_subnet"])
   event_target_ecs_target_security_groups = [module.ecs.ecs_sg]
-  event_rule_schedule_expression          = "cron(0 18 * * ? *)"
+  event_rule_schedule_expression          = var.env == "prod" ? "cron(0 2 * * ? *)" : "cron(0 18 * * ? *)"
   scheduled_container_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-ingest-container"
   scheduled_image_url                     = "${module.ecr.repository_url}:${var.names["system"]}-ingest"
   ecs_cpu                                 = 1024
