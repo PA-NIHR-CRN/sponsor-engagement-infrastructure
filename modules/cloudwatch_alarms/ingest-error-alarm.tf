@@ -28,4 +28,10 @@ resource "aws_cloudwatch_metric_alarm" "error_alarm" {
   }
 
   treat_missing_data = "notBreaching"
+
+  tags = {
+    Name        = "${var.account}-cloudwatch-${var.env}-${var.app}-ingest-error-alarm"
+    Environment = var.env
+    System      = var.system
+  }
 }
