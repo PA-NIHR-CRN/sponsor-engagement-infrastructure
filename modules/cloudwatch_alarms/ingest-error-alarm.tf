@@ -17,7 +17,7 @@ resource "aws_cloudwatch_metric_alarm" "error_alarm" {
   metric_name         = "ErrorCount"
   namespace           = "SE/${var.env}-se-ecs-ingest-errors"
   period              = "60"
-  statistic           = "Sum"
+  statistic           = "Minimum"
   threshold           = "1"
 
   alarm_description = "Alarm when an error has occured for the Sponsor Engagement ingest daily task"
