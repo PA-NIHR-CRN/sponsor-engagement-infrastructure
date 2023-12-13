@@ -34,6 +34,7 @@ module "cloudwatch_alarms" {
   load_balancer_id  = module.ecs.lb_suffix
   target_group_id   = module.ecs.tg_suffix
   ingest_log_group  = module.ingest_scheduled_task.log_group
+  web_log_group     = module.ecs.log_group
 }
 
 data "aws_secretsmanager_secret" "terraform_secret" {

@@ -128,3 +128,7 @@ variable "statistic_period" {
 variable "ingest_log_group" {
 
 }
+
+variable "web_log_group" {
+
+}
