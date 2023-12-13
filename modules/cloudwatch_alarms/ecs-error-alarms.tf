@@ -23,10 +23,6 @@ resource "aws_cloudwatch_metric_alarm" "ecs_error_alarm" {
   alarm_description = "Alarm when an error has occured for the Sponsor Engagement Web"
   alarm_actions     = [var.sns_topic]
 
-  dimensions = {
-    LogGroupName = var.web_log_group
-  }
-
   treat_missing_data = "notBreaching"
 
   tags = {
@@ -64,10 +60,6 @@ resource "aws_cloudwatch_metric_alarm" "error_alarm" {
 
   alarm_description = "Alarm when an error has occured for the Sponsor Engagement ingest daily task"
   alarm_actions     = [var.sns_topic]
-
-  dimensions = {
-    LogGroupName = var.ingest_log_group
-  }
 
   treat_missing_data = "notBreaching"
 
