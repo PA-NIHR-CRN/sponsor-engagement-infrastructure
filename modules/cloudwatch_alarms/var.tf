@@ -124,3 +124,7 @@ variable "statistic_period" {
   default     = "60"
   description = "The number of seconds that make each statistic period."
 }
+
+variable "ingest_log_group" {
+
+}

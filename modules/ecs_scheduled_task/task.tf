@@ -98,3 +98,8 @@ resource "aws_ecs_task_definition" "scheduled-task-definition" {
     System      = var.system,
   }
 }
+
+output "log_group" {
+  value = aws_cloudwatch_log_group.ecs-loggroup.name
+
+}
