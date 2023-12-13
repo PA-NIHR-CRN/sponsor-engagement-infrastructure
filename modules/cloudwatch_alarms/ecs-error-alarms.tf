@@ -10,7 +10,7 @@ resource "aws_cloudwatch_log_metric_filter" "ecs_error_filter" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "error_alarm" {
+resource "aws_cloudwatch_metric_alarm" "ecs_error_alarm" {
   alarm_name          = "${var.account}-cloudwatch-${var.env}-${var.app}-web-error-alarm"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"
