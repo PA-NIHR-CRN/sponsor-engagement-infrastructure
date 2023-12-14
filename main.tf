@@ -23,18 +23,24 @@ data "aws_sns_topic" "system_alerts_oat" {
   name  = "${var.names["${var.env}"]["accountidentifiers"]}-sns-system-alerts-oat"
 }
 
+data "aws_sns_topic" "system_alerts_service_desk" {
+  count = var.env == "prod" ? 1 : 0
+  name  = "${var.names["${var.env}"]["accountidentifiers"]}-sns-system-alerts-service-desk"
+}
+
 module "cloudwatch_alarms" {
-  source            = "./modules/cloudwatch_alarms"
-  account           = var.names["${var.env}"]["accountidentifiers"]
-  env               = var.env
-  system            = var.names["system"]
-  app               = var.names["${var.env}"]["app"]
-  sns_topic         = var.env == "oat" ? data.aws_sns_topic.system_alerts_oat[0].arn : data.aws_sns_topic.system_alerts.arn
-  cluster_instances = module.rds_aurora.db_instances
-  load_balancer_id  = module.ecs.lb_suffix
-  target_group_id   = module.ecs.tg_suffix
-  ingest_log_group  = module.ingest_scheduled_task.log_group
-  web_log_group     = module.ecs.log_group
+  source                 = "./modules/cloudwatch_alarms"
+  account                = var.names["${var.env}"]["accountidentifiers"]
+  env                    = var.env
+  system                 = var.names["system"]
+  app                    = var.names["${var.env}"]["app"]
+  sns_topic              = var.env == "oat" ? data.aws_sns_topic.system_alerts_oat[0].arn : data.aws_sns_topic.system_alerts.arn
+  cluster_instances      = module.rds_aurora.db_instances
+  load_balancer_id       = module.ecs.lb_suffix
+  target_group_id        = module.ecs.tg_suffix
+  ingest_log_group       = module.ingest_scheduled_task.log_group
+  web_log_group          = module.ecs.log_group
+  sns_topic_service_desk = var.env == "prod" ? data.aws_sns_topic.system_alerts_service_desk[0].arn : ""
 }
 
 data "aws_secretsmanager_secret" "terraform_secret" {

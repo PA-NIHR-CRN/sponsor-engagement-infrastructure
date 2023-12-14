@@ -9,7 +9,7 @@ resource "aws_cloudwatch_metric_alarm" "httpcode_target_5xx_count" {
   statistic           = "Sum"
   threshold           = "0"
   alarm_description   = "Average API 5XX target group error code count is too high"
-  alarm_actions       = [var.sns_topic]
+  alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
   ok_actions          = [var.sns_topic]
   treat_missing_data  = "notBreaching"
 

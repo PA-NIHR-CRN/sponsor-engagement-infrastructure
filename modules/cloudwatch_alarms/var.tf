@@ -132,3 +132,7 @@ variable "ingest_log_group" {
 variable "web_log_group" {
 
 }
+
+variable "sns_topic_service_desk" {
+
+}
