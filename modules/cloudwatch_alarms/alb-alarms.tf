@@ -10,7 +10,7 @@ resource "aws_cloudwatch_metric_alarm" "httpcode_target_5xx_count" {
   threshold           = "0"
   alarm_description   = "Average API 5XX target group error code count is too high"
   alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
-  ok_actions          = [var.sns_topic]
+  ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
   treat_missing_data  = "notBreaching"
 
   dimensions = {
@@ -36,8 +36,8 @@ resource "aws_cloudwatch_metric_alarm" "httpcode_lb_5xx_count" {
   statistic           = "Sum"
   threshold           = "0"
   alarm_description   = "Average API 5XX load balancer error code count is too high"
-  alarm_actions       = [var.sns_topic]
-  ok_actions          = [var.sns_topic]
+  alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
+  ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
   treat_missing_data  = "notBreaching"
 
   dimensions = {
@@ -61,8 +61,8 @@ resource "aws_cloudwatch_metric_alarm" "target_response_time_average" {
   statistic           = "Average"
   threshold           = var.response_time_threshold
   alarm_description   = format("Average API response time is greater than %s", var.response_time_threshold)
-  alarm_actions       = [var.sns_topic]
-  ok_actions          = [var.sns_topic]
+  alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
+  ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
   treat_missing_data  = "notBreaching"
 
   dimensions = {
@@ -87,8 +87,8 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy_hosts" {
   statistic           = "Minimum"
   threshold           = var.unhealthy_hosts_threshold
   alarm_description   = format("Unhealthy host count is greater than %s", var.unhealthy_hosts_threshold)
-  alarm_actions       = [var.sns_topic]
-  ok_actions          = [var.sns_topic]
+  alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
+  ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
 
   dimensions = {
     "TargetGroup"  = var.target_group_id
@@ -112,8 +112,8 @@ resource "aws_cloudwatch_metric_alarm" "healthy_hosts" {
   statistic           = "Minimum"
   threshold           = var.healthy_hosts_threshold
   alarm_description   = format("Healthy host count is less than or equal to %s", var.healthy_hosts_threshold)
-  alarm_actions       = [var.sns_topic]
-  ok_actions          = [var.sns_topic]
+  alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
+  ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
 
   dimensions = {
     "TargetGroup"  = var.target_group_id

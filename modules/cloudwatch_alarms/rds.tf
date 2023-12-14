@@ -9,8 +9,8 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_too_high" {
   statistic           = "Average"
   threshold           = "65"
   alarm_description   = "Average database CPU utilization over last 10 minutes too high"
-  alarm_actions       = [var.sns_topic]
-  ok_actions          = [var.sns_topic]
+  alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
+  ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
 
   dimensions = {
     DBInstanceIdentifier = var.cluster_instances[count.index]

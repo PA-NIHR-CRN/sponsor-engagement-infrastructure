@@ -136,3 +136,7 @@ variable "web_log_group" {
 variable "sns_topic_service_desk" {
 
 }
+
+variable "notify_log_group" {
+
+}
