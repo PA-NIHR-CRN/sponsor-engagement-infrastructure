@@ -35,7 +35,7 @@ variable "names" {
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
       "rds_anomaly_bandwidth" = 7
-      "rds_anamoly_period"    = 600
+      "rds_anomaly_period"    = 600
     }
 
     "test" = {
@@ -68,7 +68,7 @@ variable "names" {
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
       "rds_anomaly_bandwidth" = 7
-      "rds_anamoly_period"    = 600
+      "rds_anomaly_period"    = 600
     }
 
     "uat" = {
@@ -102,7 +102,7 @@ variable "names" {
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
       "rds_anomaly_bandwidth" = 3
-      "rds_anamoly_period"    = 600
+      "rds_anomaly_period"    = 600
     }
 
     "oat" = {
@@ -135,7 +135,7 @@ variable "names" {
       "ecs_cpu"               = 1024
       "ecs_memory"            = 4096
       "rds_anomaly_bandwidth" = 3
-      "rds_anamoly_period"    = 600
+      "rds_anomaly_period"    = 600
     }
 
     "prod" = {
@@ -168,7 +168,7 @@ variable "names" {
       "ecs_cpu"               = 1024
       "ecs_memory"            = 4096
       "rds_anomaly_bandwidth" = 3
-      "rds_anamoly_period"    = 600
+      "rds_anomaly_period"    = 600
     }
   }
 }
