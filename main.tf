@@ -43,7 +43,7 @@ module "cloudwatch_alarms" {
   sns_topic_service_desk = var.env == "prod" ? data.aws_sns_topic.system_alerts_service_desk[0].arn : ""
   notify_log_group       = module.notify_scheduled_task.log_group
   anomaly_band_width     = var.names["${var.env}"]["rds_anomaly_bandwidth"]
-  anomaly_period         = var.names["${var.env}"]["rds_anomaly_peroid"]
+  anomaly_period         = var.names["${var.env}"]["rds_anomaly_period"]
 }
 
 data "aws_secretsmanager_secret" "terraform_secret" {
