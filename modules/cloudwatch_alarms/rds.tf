@@ -32,7 +32,7 @@ resource "aws_cloudwatch_metric_alarm" "memory_freeable_too_low" {
   namespace           = "AWS/RDS"
   period              = "600"
   statistic           = "Average"
-  threshold           = "256000000"
+  threshold           = "512000000"
   alarm_description   = "Average database freeable memory is too low, performance may be negatively impacted."
   alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
   ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
