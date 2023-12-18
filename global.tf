@@ -34,7 +34,7 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
-      "rds_anomaly_bandwidth" = 7
+      "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
     }
 
@@ -67,7 +67,7 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
-      "rds_anomaly_bandwidth" = 7
+      "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
     }
 
@@ -101,7 +101,7 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
-      "rds_anomaly_bandwidth" = 3
+      "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
     }
 
@@ -134,7 +134,7 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 1024
       "ecs_memory"            = 4096
-      "rds_anomaly_bandwidth" = 3
+      "rds_anomaly_bandwidth" = 40
       "rds_anomaly_period"    = 600
     }
 
@@ -167,7 +167,7 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 1024
       "ecs_memory"            = 4096
-      "rds_anomaly_bandwidth" = 3
+      "rds_anomaly_bandwidth" = 40
       "rds_anomaly_period"    = 600
     }
   }
