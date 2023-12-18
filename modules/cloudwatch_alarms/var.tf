@@ -140,3 +140,15 @@ variable "sns_topic_service_desk" {
 variable "notify_log_group" {
 
 }
+
+variable "anomaly_period" {
+  type        = string
+  default     = "600"
+  description = "The number of seconds that make each evaluation period for anomaly detection."
+}
+
+variable "anomaly_band_width" {
+  type        = string
+  default     = "2"
+  description = "The width of the anomaly band, default 2.  Higher numbers means less sensitive."
+}

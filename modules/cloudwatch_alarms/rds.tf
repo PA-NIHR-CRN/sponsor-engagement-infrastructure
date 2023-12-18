@@ -59,7 +59,7 @@ resource "aws_cloudwatch_metric_alarm" "connection_count_anomalous" {
 
   metric_query {
     id          = "e1"
-    expression  = "ANOMALY_DETECTION_BAND(m1, 2)"
+    expression  = "ANOMALY_DETECTION_BAND(m1, ${var.anomaly_band_width})"
     label       = "DatabaseConnections (Expected)"
     return_data = "true"
   }
@@ -70,7 +70,7 @@ resource "aws_cloudwatch_metric_alarm" "connection_count_anomalous" {
     metric {
       metric_name = "DatabaseConnections"
       namespace   = "AWS/RDS"
-      period      = "600"
+      period      = var.anomaly_period
       stat        = "Average"
       unit        = "Count"
 
