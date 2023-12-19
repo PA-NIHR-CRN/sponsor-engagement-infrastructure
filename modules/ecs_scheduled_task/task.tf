@@ -57,7 +57,8 @@ resource "aws_cloudwatch_event_target" "ecs_scheduled_task" {
 #------------------------------------------------------------------------------
 
 resource "aws_cloudwatch_log_group" "ecs-loggroup" {
-  name = "${var.account}-ecs-${var.env}-${var.system}-${var.app}-loggroup"
+  name              = "${var.account}-ecs-${var.env}-${var.system}-${var.app}-loggroup"
+  retention_in_days = "30"
 
   tags = {
     Name        = "${var.account}-ecs-cloudwatch-${var.env}-${var.system}-${var.app}-loggroup",
