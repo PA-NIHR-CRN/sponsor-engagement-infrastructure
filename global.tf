@@ -36,6 +36,7 @@ variable "names" {
       "ecs_memory"            = 1024
       "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
+      "enable_notify_task"    = true
     }
 
     "test" = {
@@ -69,6 +70,7 @@ variable "names" {
       "ecs_memory"            = 1024
       "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
+      "enable_notify_task"    = true
     }
 
     "uat" = {
@@ -103,6 +105,7 @@ variable "names" {
       "ecs_memory"            = 1024
       "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
+      "enable_notify_task"    = true
     }
 
     "oat" = {
@@ -136,6 +139,7 @@ variable "names" {
       "ecs_memory"            = 4096
       "rds_anomaly_bandwidth" = 40
       "rds_anomaly_period"    = 600
+      "enable_notify_task"    = true
     }
 
     "prod" = {
@@ -169,6 +173,7 @@ variable "names" {
       "ecs_memory"            = 4096
       "rds_anomaly_bandwidth" = 40
       "rds_anomaly_period"    = 600
+      "enable_notify_task"    = false
     }
   }
 }
