@@ -5,7 +5,7 @@ resource "aws_cloudwatch_log_metric_filter" "ecs_error_filter" {
 
   metric_transformation {
     name      = "ErrorCount"
-    namespace = "SE/${var.env}-se-ecs-ingest-errors"
+    namespace = "SE/${var.env}-se-ecs-web-errors"
     value     = "1"
   }
 }
