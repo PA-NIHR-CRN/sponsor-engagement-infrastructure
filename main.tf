@@ -23,16 +23,27 @@ data "aws_sns_topic" "system_alerts_oat" {
   name  = "${var.names["${var.env}"]["accountidentifiers"]}-sns-system-alerts-oat"
 }
 
+data "aws_sns_topic" "system_alerts_service_desk" {
+  count = var.env == "prod" ? 1 : 0
+  name  = "${var.names["${var.env}"]["accountidentifiers"]}-sns-system-alerts-service-desk"
+}
+
 module "cloudwatch_alarms" {
-  source            = "./modules/cloudwatch_alarms"
-  account           = var.names["${var.env}"]["accountidentifiers"]
-  env               = var.env
-  system            = var.names["system"]
-  app               = var.names["${var.env}"]["app"]
-  sns_topic         = var.env == "oat" ? data.aws_sns_topic.system_alerts_oat[0].arn : data.aws_sns_topic.system_alerts.arn
-  cluster_instances = module.rds_aurora.db_instances
-  load_balancer_id  = module.ecs.lb_suffix
-  target_group_id   = module.ecs.tg_suffix
+  source                 = "./modules/cloudwatch_alarms"
+  account                = var.names["${var.env}"]["accountidentifiers"]
+  env                    = var.env
+  system                 = var.names["system"]
+  app                    = var.names["${var.env}"]["app"]
+  sns_topic              = var.env == "oat" ? data.aws_sns_topic.system_alerts_oat[0].arn : data.aws_sns_topic.system_alerts.arn
+  cluster_instances      = module.rds_aurora.db_instances
+  load_balancer_id       = module.ecs.lb_suffix
+  target_group_id        = module.ecs.tg_suffix
+  ingest_log_group       = module.ingest_scheduled_task.log_group
+  web_log_group          = module.ecs.log_group
+  sns_topic_service_desk = var.env == "prod" ? data.aws_sns_topic.system_alerts_service_desk[0].arn : ""
+  notify_log_group       = module.notify_scheduled_task.log_group
+  anomaly_band_width     = var.names["${var.env}"]["rds_anomaly_bandwidth"]
+  anomaly_period         = var.names["${var.env}"]["rds_anomaly_period"]
 }
 
 data "aws_secretsmanager_secret" "terraform_secret" {
@@ -135,6 +146,7 @@ module "notify_scheduled_task" {
   event_target_ecs_target_subnets         = (var.names["${var.env}"]["ecs_subnet"])
   event_target_ecs_target_security_groups = [module.ecs.ecs_sg]
   event_rule_schedule_expression          = "cron(0 18 1 */3 ? *)"
+  event_rule_is_enabled                   = var.names["${var.env}"]["enable_notify_task"]
   scheduled_container_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-notify-container"
   scheduled_image_url                     = "${module.ecr.repository_url}:${var.names["system"]}-notify"
   ecs_cpu                                 = var.names["${var.env}"]["ecs_cpu"]

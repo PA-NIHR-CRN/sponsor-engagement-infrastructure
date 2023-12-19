@@ -34,6 +34,9 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
+      "rds_anomaly_bandwidth" = 15
+      "rds_anomaly_period"    = 600
+      "enable_notify_task"    = true
     }
 
     "test" = {
@@ -65,6 +68,9 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
+      "rds_anomaly_bandwidth" = 15
+      "rds_anomaly_period"    = 600
+      "enable_notify_task"    = true
     }
 
     "uat" = {
@@ -97,6 +103,9 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 512
       "ecs_memory"            = 1024
+      "rds_anomaly_bandwidth" = 15
+      "rds_anomaly_period"    = 600
+      "enable_notify_task"    = true
     }
 
     "oat" = {
@@ -128,6 +137,9 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 1024
       "ecs_memory"            = 4096
+      "rds_anomaly_bandwidth" = 40
+      "rds_anomaly_period"    = 600
+      "enable_notify_task"    = true
     }
 
     "prod" = {
@@ -159,6 +171,9 @@ variable "names" {
       "whitelist_ips"         = ["0.0.0.0/0"]
       "ecs_cpu"               = 1024
       "ecs_memory"            = 4096
+      "rds_anomaly_bandwidth" = 40
+      "rds_anomaly_period"    = 600
+      "enable_notify_task"    = false
     }
   }
 }
