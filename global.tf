@@ -37,6 +37,7 @@ variable "names" {
       "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
       "enable_notify_task"    = true
+      "rds_max_connections"   = "40"
     }
 
     "test" = {
@@ -71,6 +72,7 @@ variable "names" {
       "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
       "enable_notify_task"    = true
+      "rds_max_connections"   = "40"
     }
 
     "uat" = {
@@ -106,6 +108,7 @@ variable "names" {
       "rds_anomaly_bandwidth" = 15
       "rds_anomaly_period"    = 600
       "enable_notify_task"    = true
+      "rds_max_connections"   = "40"
     }
 
     "oat" = {
@@ -140,6 +143,7 @@ variable "names" {
       "rds_anomaly_bandwidth" = 40
       "rds_anomaly_period"    = 600
       "enable_notify_task"    = true
+      "rds_max_connections"   = "60"
     }
 
     "prod" = {
@@ -174,6 +178,7 @@ variable "names" {
       "rds_anomaly_bandwidth" = 40
       "rds_anomaly_period"    = 600
       "enable_notify_task"    = false
+      "rds_max_connections"   = "60"
     }
   }
 }
