@@ -152,3 +152,7 @@ variable "anomaly_band_width" {
   default     = "2"
   description = "The width of the anomaly band, default 2.  Higher numbers means less sensitive."
 }
+
+variable "rds_max_connections" {
+
+}
