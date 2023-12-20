@@ -57,7 +57,7 @@ resource "aws_cloudwatch_metric_alarm" "alarm_rds_DatabaseConnections" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = var.rds_max_connections
-  alarm_description   = "RDS has reached maximum connections"
+  alarm_description   = "Database Connections to RDS is greater than ${var.rds_max_connections}"
   alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
   ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
 
