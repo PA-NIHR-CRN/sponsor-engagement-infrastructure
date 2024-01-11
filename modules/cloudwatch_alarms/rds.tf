@@ -47,42 +47,21 @@ resource "aws_cloudwatch_metric_alarm" "memory_freeable_too_low" {
 }
 
 // Connection Count
-resource "aws_cloudwatch_metric_alarm" "connection_count_anomalous" {
+resource "aws_cloudwatch_metric_alarm" "alarm_rds_DatabaseConnections" {
   count               = length(var.cluster_instances)
-  alarm_name          = "${var.account}-cloudwatch-${var.env}-${var.app}-rds-aurora-anomalousConnectionCount-${count.index}"
-  comparison_operator = "GreaterThanUpperThreshold"
-  evaluation_periods  = var.evaluation_period
-  threshold_metric_id = "e1"
-  alarm_description   = "Average database connections over last 10 mins has exceeded ${var.anomaly_band_width}"
+  alarm_name          = "${var.account}-cloudwatch-${var.env}-${var.app}-rds-aurora-DatabaseConnections-${count.index}"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "DatabaseConnections"
+  namespace           = "AWS/RDS"
+  period              = "60"
+  statistic           = "Maximum"
+  threshold           = var.rds_max_connections
+  alarm_description   = "Database Connections to RDS is greater than ${var.rds_max_connections}"
   alarm_actions       = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
   ok_actions          = var.env == "prod" ? [var.sns_topic, var.sns_topic_service_desk] : [var.sns_topic]
 
-  metric_query {
-    id          = "e1"
-    expression  = "ANOMALY_DETECTION_BAND(m1, ${var.anomaly_band_width})"
-    label       = "DatabaseConnections (Expected)"
-    return_data = "true"
-  }
-
-  metric_query {
-    id          = "m1"
-    return_data = "true"
-    metric {
-      metric_name = "DatabaseConnections"
-      namespace   = "AWS/RDS"
-      period      = var.anomaly_period
-      stat        = "Average"
-      unit        = "Count"
-
-      dimensions = {
-        DBInstanceIdentifier = var.cluster_instances[count.index]
-      }
-    }
-  }
-
-  tags = {
-    Name        = "${var.account}-cloudwatch-${var.env}-${var.app}-rds-aurora-anomalousConnectionCount-${count.index}"
-    Environment = var.env
-    System      = var.app
+  dimensions = {
+    DBInstanceIdentifier = var.cluster_instances[count.index]
   }
 }
