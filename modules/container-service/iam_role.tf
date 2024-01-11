@@ -41,7 +41,8 @@ resource "aws_iam_role_policy" "task-execution-role-policy" {
           "sqs:ReceiveMessage",
           "kafka:*",
           "ses:SendEmail",
-          "ses:SendRawEmail"
+          "ses:SendRawEmail",
+          "ses:GetSendQuota"
         ]
         Effect   = "Allow"
         Resource = "*"
