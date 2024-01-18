@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_log_metric_filter" "ecs_error_filter" {
   name           = "${var.account}-cloudwatch-${var.env}-${var.app}-web-error-filter"
-  pattern        = "{$.level = 50}"
+  pattern        = "{$.level = 50 && $.err.config.params.grant_type != \"refresh_token\"}"
   log_group_name = var.web_log_group
 
   metric_transformation {
