@@ -7,36 +7,6 @@ resource "aws_security_group" "sg-rds" {
   description = "Allow MYSQL inbound traffic"
   vpc_id      = var.vpc_id
 
-  ingress {
-    description     = "ecs-to-rds"
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    security_groups = [var.ecs_sg]
-  }
-
-  dynamic "ingress" {
-    for_each = var.grant_dev_db_access ? [1] : []
-    content {
-      description = "PA VPN External IP"
-      from_port   = 3306
-      to_port     = 3306
-      protocol    = "tcp"
-      cidr_blocks = var.whitelist_ips
-    }
-  }
-
-  dynamic "ingress" {
-    for_each = var.grant_odp_db_access ? [1] : []
-    content {
-      description = "ODP DB IP"
-      from_port   = 3306
-      to_port     = 3306
-      protocol    = "tcp"
-      cidr_blocks = var.odp_db_server_ip
-    }
-  }
-
   egress {
     from_port        = 0
     to_port          = 0
