@@ -73,8 +73,8 @@ variable "validation_email" {
 
 variable "ingress_rules" {
   description = "List of ingress rules with IP and description"
-  # type = mlist(object({
-  #   ip          = string
-  #   description = string
-  # }))
+  type = list(object({
+    ip          = string
+    description = string
+  }))
 }
