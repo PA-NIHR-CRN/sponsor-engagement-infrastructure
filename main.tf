@@ -84,6 +84,7 @@ module "rds_aurora" {
   ecs_sg                  = module.ecs.ecs_sg
   whitelist_ips           = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["whitelist-ips"]
   odp_db_server_ip        = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["odp-db-server-ip"]
+  ingress_rules           = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["ingress_rules"]
 }
 
 ## ECS FARGATE
@@ -105,6 +106,7 @@ module "ecs" {
   validation_email = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["validation-email"]
   ecs_cpu          = var.names["${var.env}"]["ecs_cpu"]
   ecs_memory       = var.names["${var.env}"]["ecs_memory"]
+  ingress_rules    = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["ingress_rules"]
 }
 
 module "event_role" {

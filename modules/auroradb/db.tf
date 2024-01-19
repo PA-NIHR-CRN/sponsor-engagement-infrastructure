@@ -52,6 +52,43 @@ resource "aws_security_group" "sg-rds" {
   }
 }
 
+resource "aws_security_group_rule" "sg_odp_to_rds_ingress_rule" {
+  count             = var.grant_odp_db_access ? 1 : 0
+  security_group_id = aws_security_group.sg-rds.id
+  type              = "ingress"
+  from_port         = 3306
+  to_port           = 3306
+  protocol          = "tcp"
+  cidr_blocks       = var.odp_db_server_ip
+  description       = "ODP DB IP"
+}
+
+
+resource "aws_security_group_rule" "sg_ecs_to_rds_ingress_rule" {
+  security_group_id        = aws_security_group.sg-rds.id
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  source_security_group_id = var.ecs_sg
+  description              = "ecs-to-rds"
+}
+
+// Whitelist IPs Ingress rules
+
+resource "aws_security_group_rule" "sg_rds_ingress_rule" {
+  count = length(var.ingress_rules)
+
+  security_group_id = aws_security_group.sg-rds.id
+  type              = "ingress"
+  from_port         = 3306
+  to_port           = 3306
+  protocol          = "tcp"
+  cidr_blocks       = [var.ingress_rules[count.index].ip]
+  description       = var.ingress_rules[count.index].description
+}
+
+
 resource "random_password" "password" {
   length           = 16
   special          = true
