@@ -79,6 +79,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: "Setup - Terraform CLI"
+      uses: hashicorp/setup-terraform@v1.2.1
       
     - name: Terraform Init ${{ github.event.inputs.environment }}
       run: |
