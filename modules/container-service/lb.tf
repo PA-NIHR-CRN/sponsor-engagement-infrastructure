@@ -3,29 +3,27 @@ resource "aws_security_group" "sg-lb" {
   description = "Allow HTTP(S) inbound traffic"
   vpc_id      = var.vpc_id
 
-  # dynamic "ingress" {
-  #   for_each = var.ingress_rules
-  #   content {
-  #     description = ingress.value.description
-  #     from_port   = "80"
-  #     to_port     = "80"
-  #     protocol    = "tcp"
-  #     cidr_blocks = ingress.value.ip
-  #   }
-  # }
-
   dynamic "ingress" {
-    for_each = toset([for rule in var.ingress_rules : "${rule.ip}:${rule.description}"])
-
+    for_each = var.ingress_rules
     content {
-      from_port   = 443
-      to_port     = 443
+      description = ingress.value["description"]
+      from_port   = "80"
+      to_port     = "80"
       protocol    = "tcp"
-      cidr_blocks = [split(":", ingress.key)[0]]  # Extract IP from the key
-      description = split(":", ingress.key)[1]    # Extract description from the key
+      cidr_blocks = [ingress.value["ip"]]
     }
   }
 
+  dynamic "ingress" {
+    for_each = var.ingress_rules
+    content {
+      description = ingress.value["description"]
+      from_port   = "443"
+      to_port     = "443"
+      protocol    = "tcp"
+      cidr_blocks = [ingress.value["ip"]]
+    }
+  }
 
   egress {
     from_port        = 0
