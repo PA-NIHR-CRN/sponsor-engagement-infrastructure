@@ -15,7 +15,7 @@ resource "aws_security_group" "sg-lb" {
   }
 
   dynamic "ingress" {
-    for_each = var.ingress_rules
+    for_each = nonsensitive(var.ingress_rules)
     content {
       description = ingress.value.description
       from_port   = "443"
