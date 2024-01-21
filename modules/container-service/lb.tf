@@ -3,6 +3,22 @@ resource "aws_security_group" "sg-lb" {
   description = "Allow HTTP(S) inbound traffic"
   vpc_id      = var.vpc_id
 
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = var.whitelist_ips
+  }
+
+  ingress {
+    description = "HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = var.whitelist_ips
+  }
+
   egress {
     from_port        = 0
     to_port          = 0
@@ -16,30 +32,6 @@ resource "aws_security_group" "sg-lb" {
     Environment = var.env,
     System      = var.system,
   }
-}
-
-// Whitelist IP Ingress rules
-
-resource "aws_security_group_rule" "http_ingress_rule" {
-  count             = length(var.ingress_rules)
-  security_group_id = aws_security_group.sg-lb.id
-  type              = "ingress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
-  cidr_blocks       = [var.ingress_rules[count.index].ip]
-  description       = var.ingress_rules[count.index].description
-}
-
-resource "aws_security_group_rule" "https_ingress_rule" {
-  count             = length(var.ingress_rules)
-  security_group_id = aws_security_group.sg-lb.id
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = [var.ingress_rules[count.index].ip]
-  description       = var.ingress_rules[count.index].description
 }
 
 

@@ -70,11 +70,3 @@ variable "domain_name" {
 variable "validation_email" {
 
 }
-
-variable "ingress_rules" {
-  description = "List of ingress rules with IP and description"
-  type = list(object({
-    ip          = string
-    description = string
-  }))
-}
