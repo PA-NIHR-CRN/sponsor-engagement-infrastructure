@@ -96,6 +96,21 @@ resource "aws_rds_cluster_parameter_group" "default" {
     value        = "row"
     apply_method = "pending-reboot"
   }
+  parameter {
+    apply_method = "immediate"
+    name         = "server_audit_events"
+    value        = "CONNECT,QUERY"
+  }
+  parameter {
+    apply_method = "immediate"
+    name         = "server_audit_logging"
+    value        = "1"
+  }
+  parameter {
+    apply_method = "immediate"
+    name         = "server_audit_logs_upload"
+    value        = "1"
+  }
 }
 
 resource "aws_rds_cluster" "rds_cluster" {

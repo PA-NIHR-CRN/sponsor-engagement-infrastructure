@@ -1,4 +1,4 @@
-name: 'Deployment to single environment'
+name: 'CD - Terraform Plan'
 on:
   workflow_dispatch:
     inputs:
@@ -11,14 +11,7 @@ on:
         - uat
         - oat
         - prod
-      applyplan:
-        type: boolean
-        description: Apply Plan ?
-      resources:
-        type: choice
-        description: Select the Resources
-        options:
-        - all
+
 env:
     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     ACTIONS_ALLOW_UNSECURE_COMMANDS: true
@@ -65,8 +58,6 @@ jobs:
             echo "::set-env name=AWS_ACCESS_KEY::${AWS_ACCESS_KEY}"
             echo "::set-env name=AWS_SEC_ACCESS_KEY::${AWS_SEC_ACCESS_KEY}"
             echo "::set-env name=INIT_FLAG::${INIT_FLAG}"
-            echo "::set-env name=RESOURCE::${RESOURCE}"
-            echo "::set-env name=APPLY_PLAN::${{ github.event.inputs.applyplan }}"
             
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -98,12 +89,5 @@ jobs:
            
     - name: Terraform Plan on ${{ github.event.inputs.environment }}
       run: |
-           if [[ ${{ env.APPLY_PLAN }} == "true" ]];then
-               echo "Check Plan"
-               terraform plan -var="env=${{ github.event.inputs.environment }}" ${{ env.RESOURCE }}
-               echo "Applying Plan"
-               terraform apply -var="env=${{ github.event.inputs.environment }}" ${{ env.RESOURCE }} -no-color -auto-approve
-           else 
-               echo "Checking Plan"
-               terraform plan -var="env=${{ github.event.inputs.environment }}" ${{ env.RESOURCE }}           
-           fi
+           echo "Checking Plan"
+           terraform plan -var="env=${{ github.event.inputs.environment }}"          

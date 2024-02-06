@@ -26,7 +26,7 @@ variable "names" {
       "az_zones"              = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
       "min_capacity"          = 0.5
       "max_capacity"          = 4
-      "log_types"             = ["error", "general", "slowquery"]
+      "log_types"             = ["error", "general", "slowquery", "audit"]
       "publicly_accessible"   = true
       "add_scheduler_tag"     = true
       "ecs_instance_count"    = 1
@@ -61,7 +61,7 @@ variable "names" {
       "az_zones"              = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
       "min_capacity"          = 0.5
       "max_capacity"          = 4
-      "log_types"             = ["error", "general", "slowquery"]
+      "log_types"             = ["error", "general", "slowquery", "audit"]
       "publicly_accessible"   = true
       "add_scheduler_tag"     = true
       "ecs_instance_count"    = 1
@@ -97,7 +97,7 @@ variable "names" {
       "az_zones"              = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
       "min_capacity"          = 0.5
       "max_capacity"          = 4
-      "log_types"             = ["error", "general", "slowquery"]
+      "log_types"             = ["error", "general", "slowquery", "audit"]
       "publicly_accessible"   = true
       "add_scheduler_tag"     = true
       "ecs_instance_count"    = 1
@@ -132,7 +132,7 @@ variable "names" {
       "az_zones"              = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
       "min_capacity"          = 0.5
       "max_capacity"          = 4
-      "log_types"             = ["error", "general", "slowquery"]
+      "log_types"             = ["error", "general", "slowquery", "audit"]
       "publicly_accessible"   = true
       "add_scheduler_tag"     = true
       "ecs_instance_count"    = 3
@@ -167,7 +167,7 @@ variable "names" {
       "az_zones"              = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
       "min_capacity"          = 0.5
       "max_capacity"          = 4
-      "log_types"             = ["error", "general", "slowquery"]
+      "log_types"             = ["error", "general", "slowquery", "audit"]
       "publicly_accessible"   = true
       "add_scheduler_tag"     = false
       "ecs_instance_count"    = 3
