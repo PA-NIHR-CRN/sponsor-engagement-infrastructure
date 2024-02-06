@@ -81,4 +81,4 @@ To deploy new changes to the sponsor-engagement infrastructure follow these step
  * After dev is deployed each environment will run a terraform plan that requires manual approval to deploy in stages.
  * If theres any errors or further changes another feature branch can be created to start the process again
 
-#### Deployments to production require CAB approval for any changes impacting live infrastructure ####
+#### Deployments to production requires CAB approval for any changes impacting live infrastructure ####
