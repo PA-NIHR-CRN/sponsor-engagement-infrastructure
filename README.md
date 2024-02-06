@@ -5,16 +5,17 @@ This is the main Repo for the sponsor-engagement infrastucture code.
 
 The backend code lives over in https://github.com/PA-NIHR-CRN/sponsor-engagement-web
 
+**Architecture**
+
 ![Architecture](./docs/images/architecture.png)
 
 **Resources**
-Amazon ECS (Fargate)
-Amazon ECR
-AWS WAF
-AWS Application/Network Load Balancer
-AWS Aurora
-AWS SES
-AWS CloudWatch
+* Amazon ECS (Fargate)
+* Amazon ECR
+* AWS WAF
+* AWS Application/Network Load Balancer
+* AWS Aurora
+* AWS CloudWatch
 
 **Structure of Code**: 
 
@@ -72,12 +73,12 @@ A handful of GitHub Actions workflows are defined. These are described below:
 
 To deploy new changes to the sponsor-engagement infrastructure follow these steps:
 
- Markup : * Create a feature branch off of the 'main' branch.
-          * Push changes to feature branch.
-          * Push will trigger the 'PR - Terraform Plan Dev' workflow to run a terraform plan in the dev environment.
-          * Create a pull request to 'main' branch and 1 review is required to merge, with the terraform plan available for the reviewer to quality check.
-          * After approval merge to main and the 'CD - Deploy to all Environments' will run starting with Dev that will automatically deploy.
-          * After dev is deployed each environment will run a terraform plan that requires manual approval to deploy in stages.
-          * If theres any errors or further changes another feature branch can be created to start the process again
+ * Create a feature branch off of the 'main' branch.
+ * Push changes to feature branch.
+ * Push will trigger the 'PR - Terraform Plan Dev' workflow to run a terraform plan in the dev environment.
+ * Create a pull request to 'main' branch and 1 review is required to merge, with the terraform plan available for the reviewer to quality check.
+ * After approval merge to main and the 'CD - Deploy to all Environments' will run starting with Dev that will automatically deploy.
+ * After dev is deployed each environment will run a terraform plan that requires manual approval to deploy in stages.
+ * If theres any errors or further changes another feature branch can be created to start the process again
 
-Markup :  #### Deployments to production require CAB approval for any changes impacting live infrastructure ####
+#### Deployments to production require CAB approval for any changes impacting live infrastructure ####
