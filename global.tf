@@ -177,7 +177,7 @@ variable "names" {
       "ecs_memory"            = 4096
       "rds_anomaly_bandwidth" = 40
       "rds_anomaly_period"    = 600
-      "enable_notify_task"    = false
+      "enable_notify_task"    = true
       "rds_max_connections"   = "50"
     }
   }
