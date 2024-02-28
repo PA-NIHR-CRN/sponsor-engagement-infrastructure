@@ -114,3 +114,11 @@ variable "whitelist_ips" {
 
 variable "odp_db_server_ip" {
 }
+
+variable "ingress_rules" {
+  description = "List of ingress rules with IP and description"
+  type = list(object({
+    ip          = string
+    description = string
+  }))
+}
