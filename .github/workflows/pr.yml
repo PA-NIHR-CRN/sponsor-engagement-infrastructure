@@ -35,7 +35,9 @@ jobs:
       uses: bridgecrewio/checkov-action@master
       with:
         directory: .
-        soft_fail: true
+        quiet: true
+        soft_fail: true 
+        framework: terraform 
 
     - name: Terraform Init
       run: |
