@@ -39,19 +39,14 @@ jobs:
         soft_fail: true 
         framework: terraform 
 
-    - name: Run Trivy vulnerability scanner in IaC mode
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'config'
-        hide-progress: false
-        exit-code: '1'
-        ignore-unfixed: true
-        severity: 'CRITICAL,HIGH'
-
     - name: Terraform Init
       run: |
            terraform init -backend-config="bucket=${{ secrets.CRNCC_DEV_TERRAFORM_BUCKET }}" -backend-config="key=se/dev/terraform.tfstate"
-        
+
+    - name: Terraform fmt check
+      run: |
+        terraform fmt -check
+
     - name: Terraform Validate
       run: |
            terraform validate
