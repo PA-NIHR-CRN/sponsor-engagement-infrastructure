@@ -30,7 +30,7 @@ data "aws_sns_topic" "system_alerts_service_desk" {
 
 module "cloudwatch_alarms" {
   source                 = "./modules/cloudwatch_alarms"
-  account                = var.names["${var.env}"]["accountidentifiers"]
+    account                = var.names["${var.env}"]["accountidentifiers"]
   env                    = var.env
   system                 = var.names["system"]
   app                    = var.names["${var.env}"]["app"]
