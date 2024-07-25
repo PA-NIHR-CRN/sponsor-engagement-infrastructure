@@ -1,3 +1,6 @@
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
 resource "aws_iam_role" "iam-ecs-task-role" {
   name = "${var.account}-iam-${var.env}-ecs-${var.system}-iam-role"
 
