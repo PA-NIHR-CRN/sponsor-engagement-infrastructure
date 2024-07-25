@@ -20,7 +20,7 @@ resource "aws_cloudwatch_log_group" "ecs-cloudwatchloggroup" {
 }
 
 
-resource "aws_ecs_task_definition" "ecs-task-definition" {
+/*resource "aws_ecs_task_definition" "ecs-task-definition" {
   family                   = "${var.account}-ecs-${var.env}-${var.system}-task-definition"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -51,7 +51,7 @@ resource "aws_ecs_task_definition" "ecs-task-definition" {
     Environment = var.env,
     System      = var.system,
   }
-}
+}*/
 
 resource "aws_security_group" "sg-ecs" {
   name        = "${var.account}-sg-${var.env}-ecs-${var.system}"
