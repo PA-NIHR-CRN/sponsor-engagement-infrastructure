@@ -47,6 +47,13 @@ resource "aws_iam_role_policy" "task-execution-role-policy" {
         Effect   = "Allow"
         Resource = "*"
       },
+      {
+        "Action" : [
+          "secretsmanager:GetSecretValue"
+        ]
+        Effect   = "Allow"
+        Resource = ["arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${var.account}-secret-${var.env}-${var.system}-app-config-*"]
+      },
     ]
   })
 }
