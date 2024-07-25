@@ -1,3 +1,6 @@
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
 resource "aws_iam_role" "iam-ecs-task-role" {
   name = "${var.account}-iam-${var.env}-ecs-${var.system}-iam-role"
 
@@ -46,6 +49,13 @@ resource "aws_iam_role_policy" "task-execution-role-policy" {
         ]
         Effect   = "Allow"
         Resource = "*"
+      },
+      {
+        "Action" : [
+          "secretsmanager:GetSecretValue"
+        ]
+        Effect   = "Allow"
+        Resource = ["arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:${var.account}-secret-${var.env}-${var.system}-app-config-*"]
       },
     ]
   })
