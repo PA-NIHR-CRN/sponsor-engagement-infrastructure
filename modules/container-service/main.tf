@@ -84,7 +84,7 @@ resource "aws_security_group" "sg-ecs" {
 resource "aws_ecs_service" "ecs_service" {
   name            = "${var.account}-ecs-${var.env}-${var.system}-service"
   cluster         = aws_ecs_cluster.ecs-cluster.id
-  task_definition = aws_ecs_task_definition.ecs-task-definition.arn
+  # task_definition = aws_ecs_task_definition.ecs-task-definition.arn
   desired_count   = var.instance_count
   network_configuration {
     security_groups  = [aws_security_group.sg-ecs.id]
