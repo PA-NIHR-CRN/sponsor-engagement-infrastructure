@@ -131,6 +131,7 @@ resource "aws_rds_cluster" "rds_cluster" {
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.default.name
   enabled_cloudwatch_logs_exports = var.log_types
   vpc_security_group_ids          = [aws_security_group.sg-rds.id]
+  copy_tags_to_snapshot           = true
 
   serverlessv2_scaling_configuration {
     max_capacity = var.max_capacity
