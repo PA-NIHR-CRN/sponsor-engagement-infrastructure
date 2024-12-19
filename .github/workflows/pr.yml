@@ -21,6 +21,9 @@ jobs:
         shell: bash
 
     steps:
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
