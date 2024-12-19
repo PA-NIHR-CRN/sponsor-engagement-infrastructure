@@ -13,6 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
+
     - name: Configure AWS Credentials - Dev
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -40,6 +44,10 @@ jobs:
     needs: deploy-dev
     steps:
     - uses: actions/checkout@v4
+
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
 
     - name: Configure AWS Credentials - test
       uses: aws-actions/configure-aws-credentials@v4
@@ -73,6 +81,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
+
     - name: Configure AWS Credentials - test
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -103,6 +115,10 @@ jobs:
     needs: deploy-test
     steps:
     - uses: actions/checkout@v4
+
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
 
     - name: Configure AWS Credentials - uat
       uses: aws-actions/configure-aws-credentials@v4
@@ -136,6 +152,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
+
     - name: Configure AWS Credentials - uat
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -167,6 +187,10 @@ jobs:
     needs: deploy-UAT
     steps:
     - uses: actions/checkout@v4
+
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
 
     - name: Configure AWS Credentials - oat
       uses: aws-actions/configure-aws-credentials@v4
@@ -200,6 +224,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
+
     - name: Configure AWS Credentials - oat
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -230,6 +258,10 @@ jobs:
     needs: deploy-OAT
     steps:
     - uses: actions/checkout@v4
+
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
 
     - name: Configure AWS Credentials - prod
       uses: aws-actions/configure-aws-credentials@v4
@@ -262,6 +294,10 @@ jobs:
     environment: PROD
     steps:
     - uses: actions/checkout@v4
+
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2" 
 
     - name: Configure AWS Credentials - prod
       uses: aws-actions/configure-aws-credentials@v4
