@@ -145,7 +145,7 @@ resource "aws_rds_cluster" "rds_cluster" {
       System           = var.app
       aws-backup-daily = true
     },
-    var.add_scheduler_tag ? { "instance-scheduler" = "rds-se" } : {},
+    var.add_scheduler_tag ? { "instance-scheduler" = var.env == "oat" ? "rds-se-oat" : "rds-se" } : {},
     var.env == "prod" ? { "aws-backup-daily" = "true" } : {},
     var.env == "prod" ? { "aws-backup-weekly" = "true" } : {},
   )
