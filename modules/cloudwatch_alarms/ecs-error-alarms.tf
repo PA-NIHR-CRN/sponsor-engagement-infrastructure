@@ -111,7 +111,7 @@ resource "aws_cloudwatch_metric_alarm" "notify_error_alarm" {
 
 # ECS INVITATION-MONITOR ALARM
 
-resource "aws_cloudwatch_log_metric_filter" "error_filter" {
+resource "aws_cloudwatch_log_metric_filter" "invitation_monitor_error_filter" {
   name           = "${var.account}-cloudwatch-${var.env}-${var.app}-invitation-monitor-error-filter"
   pattern        = "{$.level = 50}"
   log_group_name = var.invitation_monitor_log_group
@@ -123,7 +123,7 @@ resource "aws_cloudwatch_log_metric_filter" "error_filter" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "error_alarm" {
+resource "aws_cloudwatch_metric_alarm" "invitation_monitor_error_alarm" {
   alarm_name          = "${var.account}-cloudwatch-${var.env}-${var.app}-invitation-monitor-error-alarm"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"
