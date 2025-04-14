@@ -156,3 +156,7 @@ variable "anomaly_band_width" {
 variable "rds_max_connections" {
 
 }
+
+variable "invitation_monitor_log_group" {
+
+}

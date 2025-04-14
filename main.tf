@@ -29,22 +29,23 @@ data "aws_sns_topic" "system_alerts_service_desk" {
 }
 
 module "cloudwatch_alarms" {
-  source                 = "./modules/cloudwatch_alarms"
-  account                = var.names["${var.env}"]["accountidentifiers"]
-  env                    = var.env
-  system                 = var.names["system"]
-  app                    = var.names["${var.env}"]["app"]
-  sns_topic              = var.env == "oat" ? data.aws_sns_topic.system_alerts_oat[0].arn : data.aws_sns_topic.system_alerts.arn
-  cluster_instances      = module.rds_aurora.db_instances
-  load_balancer_id       = module.ecs.lb_suffix
-  target_group_id        = module.ecs.tg_suffix
-  ingest_log_group       = module.ingest_scheduled_task.log_group
-  web_log_group          = module.ecs.log_group
-  sns_topic_service_desk = var.env == "prod" ? data.aws_sns_topic.system_alerts_service_desk[0].arn : ""
-  notify_log_group       = module.notify_scheduled_task.log_group
-  anomaly_band_width     = var.names["${var.env}"]["rds_anomaly_bandwidth"]
-  anomaly_period         = var.names["${var.env}"]["rds_anomaly_period"]
-  rds_max_connections    = var.names["${var.env}"]["rds_max_connections"]
+  source                       = "./modules/cloudwatch_alarms"
+  account                      = var.names["${var.env}"]["accountidentifiers"]
+  env                          = var.env
+  system                       = var.names["system"]
+  app                          = var.names["${var.env}"]["app"]
+  sns_topic                    = var.env == "oat" ? data.aws_sns_topic.system_alerts_oat[0].arn : data.aws_sns_topic.system_alerts.arn
+  cluster_instances            = module.rds_aurora.db_instances
+  load_balancer_id             = module.ecs.lb_suffix
+  target_group_id              = module.ecs.tg_suffix
+  ingest_log_group             = module.ingest_scheduled_task.log_group
+  web_log_group                = module.ecs.log_group
+  sns_topic_service_desk       = var.env == "prod" ? data.aws_sns_topic.system_alerts_service_desk[0].arn : ""
+  notify_log_group             = module.notify_scheduled_task.log_group
+  invitation_monitor_log_group = module.invitation_monitor_scheduled_task.log_group
+  anomaly_band_width           = var.names["${var.env}"]["rds_anomaly_bandwidth"]
+  anomaly_period               = var.names["${var.env}"]["rds_anomaly_period"]
+  rds_max_connections          = var.names["${var.env}"]["rds_max_connections"]
 }
 
 data "aws_secretsmanager_secret" "terraform_secret" {
@@ -132,6 +133,24 @@ module "ingest_scheduled_task" {
   event_rule_schedule_expression          = var.env == "prod" ? "cron(0 02 * * ? *)" : "cron(0 18 * * ? *)"
   scheduled_container_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-ingest-container"
   scheduled_image_url                     = "${module.ecr.repository_url}:${var.names["system"]}-ingest"
+  ecs_cpu                                 = 1024
+  ecs_memory                              = 4096
+}
+
+module "invitation_monitor_scheduled_task" {
+  source                                  = "./modules/ecs_scheduled_task"
+  account                                 = var.names["${var.env}"]["accountidentifiers"]
+  env                                     = var.env
+  system                                  = var.names["system"]
+  app                                     = "invitation-monitor"
+  event_rule_role_arn                     = module.event_role.event_role_arn
+  ecs_cluster_arn                         = module.ecs.ecs_cluster_arn
+  ecs_task_role_arn                       = module.ecs.role_arn
+  event_target_ecs_target_subnets         = (var.names["${var.env}"]["ecs_subnet"])
+  event_target_ecs_target_security_groups = [module.ecs.ecs_sg]
+  event_rule_schedule_expression          = var.env == "prod" ? "cron(0 02 * * ? *)" : "cron(0 18 * * ? *)"
+  scheduled_container_name                = "${var.names["${var.env}"]["accountidentifiers"]}-ecs-${var.env}-${var.names["system"]}-invitation-monitor-container"
+  scheduled_image_url                     = "${module.ecr.repository_url}:${var.names["system"]}-invitation-monitor"
   ecs_cpu                                 = 1024
   ecs_memory                              = 4096
 }
