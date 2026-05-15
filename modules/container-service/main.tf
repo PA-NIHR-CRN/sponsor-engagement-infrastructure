@@ -114,7 +114,7 @@ resource "aws_ecs_service" "ecs_service" {
 }
 
 resource "aws_appautoscaling_target" "ecs_autoscaling_target" {
-  count        = contains(["dev", "test"], var.env) ? 1 : 0
+  count        = contains(["dev", "test", "uat"], var.env) ? 1 : 0
   max_capacity = 1
   min_capacity = 0
   resource_id  = "service/${aws_ecs_cluster.ecs-cluster.name}/${aws_ecs_service.ecs_service.name}"
@@ -123,7 +123,7 @@ resource "aws_appautoscaling_target" "ecs_autoscaling_target" {
 }
 
 resource "aws_appautoscaling_scheduled_action" "my_service_scale_down" {
-  count              = contains(["dev", "test"], var.env) ? 1 : 0
+  count              = contains(["dev", "test", "uat"], var.env) ? 1 : 0
   name               = "${aws_ecs_service.ecs_service.name}-scale-down"
   resource_id        = aws_appautoscaling_target.ecs_autoscaling_target[0].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_autoscaling_target[0].scalable_dimension
@@ -137,7 +137,7 @@ resource "aws_appautoscaling_scheduled_action" "my_service_scale_down" {
   }
 }
 resource "aws_appautoscaling_scheduled_action" "my_service_scale_up" {
-  count              = contains(["dev", "test"], var.env) ? 1 : 0
+  count              = contains(["dev", "test", "uat"], var.env) ? 1 : 0
   name               = "${aws_ecs_service.ecs_service.name}-scale-up"
   resource_id        = aws_appautoscaling_target.ecs_autoscaling_target[0].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_autoscaling_target[0].scalable_dimension
