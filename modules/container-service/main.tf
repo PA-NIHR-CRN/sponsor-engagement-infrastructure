@@ -113,6 +113,44 @@ resource "aws_ecs_service" "ecs_service" {
   }
 }
 
+resource "aws_appautoscaling_target" "ecs_autoscaling_target" {
+  count        = contains(["dev", "test"], var.env) ? 1 : 0
+  max_capacity = 1
+  min_capacity = 0
+  resource_id  = "service/${aws_ecs_cluster.ecs-cluster.name}/${aws_ecs_service.ecs_service.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace = "ecs"
+}
+
+resource "aws_appautoscaling_scheduled_action" "my_service_scale_down" {
+  count              = contains(["dev", "test"], var.env) ? 1 : 0
+  name               = "${aws_ecs_service.ecs_service.name}-scale-down"
+  resource_id        = aws_appautoscaling_target.ecs_autoscaling_target[0].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_autoscaling_target[0].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_autoscaling_target[0].service_namespace
+  schedule           = "cron(0 18 ? * MON-FRI *)"
+  timezone           = "Europe/London"
+
+  scalable_target_action {
+    min_capacity = 0
+    max_capacity = 0
+  }
+}
+resource "aws_appautoscaling_scheduled_action" "my_service_scale_up" {
+  count              = contains(["dev", "test"], var.env) ? 1 : 0
+  name               = "${aws_ecs_service.ecs_service.name}-scale-up"
+  resource_id        = aws_appautoscaling_target.ecs_autoscaling_target[0].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_autoscaling_target[0].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_autoscaling_target[0].service_namespace
+  schedule           = "cron(0 7 ? * MON-FRI *)"
+  timezone           = "Europe/London"
+
+  scalable_target_action {
+    min_capacity = 1
+    max_capacity = 1
+  }
+}
+
 output "ecs_sg" {
   value = aws_security_group.sg-ecs.id
 }
