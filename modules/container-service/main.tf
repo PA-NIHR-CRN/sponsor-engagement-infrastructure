@@ -128,8 +128,11 @@ resource "aws_appautoscaling_scheduled_action" "my_service_scale_down" {
   resource_id        = aws_appautoscaling_target.ecs_autoscaling_target[0].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_autoscaling_target[0].scalable_dimension
   service_namespace  = aws_appautoscaling_target.ecs_autoscaling_target[0].service_namespace
-  schedule           = "cron(0 18 ? * MON-FRI *)"
-  timezone           = "Europe/London"
+  schedule           = "cron(15 18 ? * MON-FRI *)"
+  #timezone           = "Europe/London"
+  # The timezone has been commented out to align with the ingest task time: event_rule_schedule_expression
+  # This is due to it using EventBridge Rules and not Schedules, which don't support timezone, so this matches UTC time.
+  # Improvement would be to migrate to using EventBridge Schedules.
 
   scalable_target_action {
     min_capacity = 0
